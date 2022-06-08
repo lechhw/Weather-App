@@ -13,17 +13,20 @@ React.js 를 사용하고 OpenWeather API 를 이용한 날씨 앱 입니다.<br
 
 # Preview
 
+
 <div align="center">
-<img src="https://user-images.githubusercontent.com/99241230/172650573-116df0ab-6b9e-49ac-98a4-3e1aa0d759f0.gif">
+  <img src="https://user-images.githubusercontent.com/99241230/172650573-116df0ab-6b9e-49ac-98a4-3e1aa0d759f0.gif">
+</div>
 
 <br>
 
+<div align="center">
 <img height="400" src="https://user-images.githubusercontent.com/99241230/172650558-52b46d3d-7204-4feb-bd94-1fd70f6920b8.png">
 </div>
 
 <br>
 
-## Link : [Weather App](https://lechhw-weather-app.netlify.app)
+### Link : [Weather App](https://lechhw-weather-app.netlify.app)
 
 <br>
 
