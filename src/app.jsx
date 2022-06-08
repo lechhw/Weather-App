@@ -64,12 +64,6 @@ function App({ weatherService }) {
   return (
     <div className={`${styles.app} ${getWeatherImage(currentWeather.weather)}`}>
       <div className={styles.info}>
-        <div className={styles.date}>
-          <span className={styles.day}>{date.day}</span>
-          <span className={styles.today}>{date.monthAndDate}</span>
-          <span className={styles.year}>{date.year}</span>
-        </div>
-
         <div className={styles.weather_wrapper}>
           <p className={styles.location}>
             <i className="fa-solid fa-location-dot"></i>
@@ -79,6 +73,12 @@ function App({ weatherService }) {
           <p className={styles.temp}>{currentWeather.temp}℃</p>
 
           <p className={styles.weather}>{currentWeather.weather}</p>
+        </div>
+
+        <div className={styles.date}>
+          <span className={styles.day}>{date.day}</span>
+          <span className={styles.today}>{date.monthAndDate}</span>
+          <span className={styles.year}>{date.year}</span>
         </div>
       </div>
 
