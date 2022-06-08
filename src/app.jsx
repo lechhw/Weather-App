@@ -15,11 +15,12 @@ function App({ weatherService }) {
   });
 
   // 검색된 도시 날씨 정보 가져오기
-  const getSearchWeather = (data) => {
+  const getSearchWeather = async (city) => {
+    const result = await weatherService.getWeather(city);
     setCurrentWeather({
-      location: data.name,
-      temp: Math.floor(data.main.temp),
-      weather: data.weather[0].main,
+      location: result.name,
+      temp: Math.floor(result.main.temp),
+      weather: result.weather[0].main,
     });
   };
 

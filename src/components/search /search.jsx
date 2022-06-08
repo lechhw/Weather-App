@@ -14,8 +14,10 @@ const Search = ({ weatherService, getSearchWeather }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    const city = inputRef.current.value;
+    let city = inputRef.current.value;
     inputRef.current.value = '';
+
+    getSearchWeather(city);
 
     const data = await weatherService.getWeather(city);
     setDetailInfo({
@@ -25,8 +27,6 @@ const Search = ({ weatherService, getSearchWeather }) => {
       humidity: data.main.humidity,
       windSpeed: Math.floor(data.wind.speed),
     });
-
-    getSearchWeather(data);
   };
 
   return (
