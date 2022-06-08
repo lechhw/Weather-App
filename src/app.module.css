@@ -5,10 +5,31 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  transition: all 500ms ease-in-out;
 }
 
 .info {
   position: relative;
+}
+
+.date {
+  position: absolute;
+  display: flex;
+  bottom: 8%;
+  left: 7rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-style: italic;
+  text-shadow: 1px 1px 1px gray;
+  color: #efefef;
+}
+
+.day {
+  margin-right: 0.5rem;
+}
+
+.today {
+  margin-right: 0.5rem;
 }
 
 .weather_wrapper {
@@ -20,7 +41,7 @@
   font-size: 2.2rem;
   font-weight: 700;
   text-shadow: 1px 1px 1px gray;
-  color: #3f3f44;
+  color: #efefef;
 }
 
 .location {

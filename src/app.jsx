@@ -8,7 +8,13 @@ function App({ weatherService }) {
     temp: null,
     weather: null,
   });
+  const [date, setDate] = useState({
+    day: null,
+    monthAndDate: null,
+    year: null,
+  });
 
+  // 검색된 도시 날씨 정보 가져오기
   const getSearchWeather = (data) => {
     setCurrentWeather({
       location: data.name,
@@ -17,6 +23,24 @@ function App({ weatherService }) {
     });
   };
 
+  // 현재 날짜 구하기
+  useEffect(() => {
+    const today = new Date();
+    const day = today.getDay();
+    const month = String(today.getMonth() + 1).padStart(2, 0);
+    const date = String(today.getDate()).padStart(2, 0);
+    const monthAndDate = `${month}th${date}`;
+    const year = today.getFullYear();
+
+    const dayArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    setDate({
+      day: dayArray[day],
+      monthAndDate: monthAndDate,
+      year: year,
+    });
+  }, []);
+
   //현재 위치의 날씨 정보 불러오기
   useEffect(() => {
     const geoSuccess = async (position) => {
@@ -24,7 +48,6 @@ function App({ weatherService }) {
       const lon = position.coords.longitude;
 
       const data = await weatherService.getCurrentWeather(lat, lon);
-      console.log(data);
       setCurrentWeather({
         location: data.name,
         temp: Math.floor(data.main.temp),
@@ -41,6 +64,12 @@ function App({ weatherService }) {
   return (
     <div className={`${styles.app} ${getWeatherImage(currentWeather.weather)}`}>
       <div className={styles.info}>
+        <div className={styles.date}>
+          <span className={styles.day}>{date.day}</span>
+          <span className={styles.today}>{date.monthAndDate}</span>
+          <span className={styles.year}>{date.year}</span>
+        </div>
+
         <div className={styles.weather_wrapper}>
           <p className={styles.location}>
             <i className="fa-solid fa-location-dot"></i>
