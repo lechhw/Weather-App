@@ -32,7 +32,12 @@ const Search = ({ weatherService, getSearchWeather }) => {
   return (
     <section className={styles.container}>
       <form className={styles.form} onSubmit={onSubmit}>
-        <input className={styles.input} ref={inputRef} type="text"></input>
+        <input
+          className={styles.input}
+          ref={inputRef}
+          type="text"
+          placeholder="Search"
+        ></input>
         <button className={styles.button}>
           <i className="fa-solid fa-magnifying-glass-location"></i>
         </button>
