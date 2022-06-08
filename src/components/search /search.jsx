@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styles from './search.module.css';
 
-const Search = ({ weatherService }) => {
+const Search = ({ weatherService, getSearchWeather }) => {
   const inputRef = useRef();
   const [detailInfo, setDetailInfo] = useState({
     weather: null,
@@ -11,7 +11,7 @@ const Search = ({ weatherService }) => {
     windSpeed: null,
   });
 
-  const getData = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const city = inputRef.current.value;
@@ -25,11 +25,13 @@ const Search = ({ weatherService }) => {
       humidity: data.main.humidity,
       windSpeed: Math.floor(data.wind.speed),
     });
+
+    getSearchWeather(data);
   };
 
   return (
     <section className={styles.container}>
-      <form className={styles.form} onSubmit={getData}>
+      <form className={styles.form} onSubmit={onSubmit}>
         <input className={styles.input} ref={inputRef} type="text"></input>
         <button className={styles.button}>
           <i className="fa-solid fa-magnifying-glass-location"></i>

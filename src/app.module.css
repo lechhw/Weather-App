@@ -1,0 +1,62 @@
+.app {
+  display: flex;
+  justify-content: space-between;
+  background-image: url('/public/images/clouds.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.info {
+  position: relative;
+}
+
+.weather_wrapper {
+  position: absolute;
+  display: flex;
+  left: 6rem;
+  bottom: 10%;
+  width: 100%;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 1px gray;
+  color: #3f3f44;
+}
+
+.location {
+  display: flex;
+  margin-right: 1rem;
+}
+
+.location strong {
+  margin-left: 0.2em;
+}
+
+.temp {
+  margin-right: 1rem;
+}
+
+.app.clouds {
+  background-image: url('/public/images/clouds.jpg');
+}
+.app.clear {
+  background-image: url('/public/images/clear.jpg');
+}
+.app.thunder {
+  background-image: url('/public/images/thunder.jpg');
+}
+.app.drizzle {
+  background-image: url('/public/images/drizzle.jpg');
+}
+.app.rain {
+  background-image: url('/public/images/rain.jpg');
+}
+.app.snow {
+  background-image: url('/public/images/snow.jpg');
+}
+.app.smog {
+  background-image: url('/public/images/smog.jpg');
+}
+.app.default {
+  background-image: url('/public/images/smog.jpg');
+}
