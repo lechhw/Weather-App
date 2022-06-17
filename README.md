@@ -30,9 +30,7 @@ Date()함수를 사용하여 오늘 날짜를 보여주고, getCurrentPosition()
 
 ## Search
 
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/99241230/172650573-116df0ab-6b9e-49ac-98a4-3e1aa0d759f0.gif">
-</div>
+<img src="https://user-images.githubusercontent.com/99241230/172650573-116df0ab-6b9e-49ac-98a4-3e1aa0d759f0.gif">
 
 <br>
 
