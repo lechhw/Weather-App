@@ -2,31 +2,16 @@
 
 # Intro
 
-React.js 를 사용하고 OpenWeather API 를 이용한 날씨 앱 입니다.<br>
-
-- [x] 페이지가 로드되면 현재 위치와 날짜를 불러오고 위치의 날씨정보를 불러옵니다. <br>
-- [x] 사용자가 도시명을 입력하면 해당 도시의 온도,습도,풍속 등의 디테일한 날씨정보를 알려줍니다.<br>
-- [x] 해당 날씨에 맞는 배경 이미지로 전환이 됩니다.
-- [x] 반응형 UI
+OpenWeatherMap API 를 이용한 날씨 검색 웹 어플리케이션 입니다.<br>
+Date()함수를 사용하여 오늘 날짜를 보여주고, getCurrentPosition()함수를 사용하여 현재 위치 정보를 받아와 <br>
+그 정보를 바탕으로 해당위치의 날씨정보에 맞는 배경화면 이미지와 함께 보여줍니다.<br>
+또한 사용자가 검색창에 도시명을 입력하면 해당 도시의 온도,습도,풍속 등의 디테일한 날씨정보를 알려줍니다.
 
 <br>
 
-# Preview
+## Live Demo : [Business Card Maker](https://lechhw-weather-app.netlify.app)
 
-
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/99241230/172650573-116df0ab-6b9e-49ac-98a4-3e1aa0d759f0.gif">
-</div>
-
-<br>
-
-<div align="center">
-<img height="400" src="https://user-images.githubusercontent.com/99241230/172650558-52b46d3d-7204-4feb-bd94-1fd70f6920b8.png">
-</div>
-
-<br>
-
-### Link : [Weather App](https://lechhw-weather-app.netlify.app)
+작업기간 (2022.06.07 ~ 2022.06.09)
 
 <br>
 
@@ -38,6 +23,22 @@ React.js 를 사용하고 OpenWeather API 를 이용한 날씨 앱 입니다.<br
 
 - [x] PostCSS
 - [x] Postman
+
+<br>
+
+# Preview
+
+## Search
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/99241230/172650573-116df0ab-6b9e-49ac-98a4-3e1aa0d759f0.gif">
+</div>
+
+<br>
+
+## Responsive Web
+
+<img src="https://user-images.githubusercontent.com/99241230/174286058-2d452727-67a8-4f45-9eba-9b8d20c9833c.gif">
 
 <br>
 
@@ -64,7 +65,7 @@ React.js 를 사용하고 OpenWeather API 를 이용한 날씨 앱 입니다.<br
 
 <br>
 
-- navigator.geolocation.getCurrentPosition() 메서드를 사용하여 페이지가 road 되면 현재 위치 정보를 받아와서 현위치의 날씨정보를 화면에 구현하였습니다.
+- getCurrentPosition() 메서드를 사용하여 페이지가 road 되면 현재 위치 정보를 받아와서 현위치의 날씨정보를 화면에 구현하였습니다.
 
 ```js
 //현재 위치의 날씨 정보 불러오기
@@ -92,7 +93,7 @@ useEffect(() => {
 
 <br>
 
-- 도시명 입력시 입력한 값을 파라미터로 전달하여 해당도시의 날씨정보값을 받아옵니다.
+- 도시명 입력시 입력한 값을 파라미터로 전달하여 해당도시의 날씨정보를 받아옵니다.
   받아온 날씨정보를 useState() 를 사용하여 값을 넣어주고 해당내용을 화면에 보여주었습니다.
 
 ```js
