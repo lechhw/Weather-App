@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.logo {
+  width: 2.5rem;
+}
+
+.title {
+  font-size: 1.1rem;
+  color: #2c3b2a;
+}
