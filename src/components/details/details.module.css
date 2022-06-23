@@ -1,0 +1,17 @@
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #dfdfde;
+}
+
+.info dt,
+.info dd {
+  font-weight: 500;
+  padding: 1.2rem 0;
+}
+
+.info dd {
+  margin: 0;
+}
