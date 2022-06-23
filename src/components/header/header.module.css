@@ -1,15 +1,35 @@
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
   width: 2.5rem;
 }
 
 .title {
-  font-size: 1.1rem;
-  color: #2c3b2a;
+  font-size: 1.2rem;
+  color: #000000;
+  text-shadow: 0.05rem 0.05rem 0 rgb(148, 148, 148);
+}
+
+.logoutBtn {
+  border: 0;
+  background: 0;
+  cursor: pointer;
+  padding: 0.5rem 0.2rem;
+  color: #ffff;
+  font-weight: 500;
+}
+
+.logoutBtn:hover {
+  opacity: 0.5;
 }
