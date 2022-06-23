@@ -1,25 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './home.module.css';
 import Search from '../search /search';
 import { useHistory } from 'react-router-dom';
 import Header from '../header/header';
+import DateForm from '../date_form/date_form';
 
-const Home = ({ authService, weatherService }) => {
+const Home = ({ authService, weatherService, bookmarkDB }) => {
+  const locationRef = useRef();
   const history = useHistory();
+
+  // login 컴포넌트에서 받아온 유저정보를 historyState 에 저장
   const historyState = history.location.state;
-  const [userId, setUserId] = useState(historyState && historyState.id);
+  const [userId, setUserId] = useState(historyState && historyState.id); //
+  const [currentWeather, setCurrentWeather] = useState([
+    {
+      location: '',
+      temp: '',
+      weather: '',
+    },
+  ]);
+  const [bookmark, setBookmark] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  const [currentWeather, setCurrentWeather] = useState({
-    location: null,
-    temp: null,
-    weather: null,
-  });
+  const deleteBookmark = (card) => {
+    setBookmark((bookmark) => {
+      const updated = { ...bookmark };
+      delete updated[card.id];
+      return updated;
+    });
+    bookmarkDB.removeBookmark(userId, card);
+  };
 
-  const [date, setDate] = useState({
-    day: null,
-    monthAndDate: null,
-    year: null,
-  });
+  const addBookmark = (card) => {
+    setBookmark((bookmark) => {
+      const updated = { ...bookmark };
+      updated[card.id] = card;
+      return updated;
+    });
+    bookmarkDB.saveBookmark(userId, card);
+  };
+
+  const onClickBookmark = () => {
+    const city = locationRef.current.textContent;
+    const card = {
+      id: Date.now(),
+      location: city,
+    };
+
+    if (Object.values(bookmark).some((item) => item.location === city)) {
+      return;
+    }
+
+    addBookmark(card);
+  };
 
   // 검색된 도시 날씨 정보 가져오기
   const getSearchWeather = async (city) => {
@@ -31,24 +64,6 @@ const Home = ({ authService, weatherService }) => {
     });
   };
 
-  // 현재 날짜 구하기
-  useEffect(() => {
-    const today = new Date();
-    const day = today.getDay();
-    const month = String(today.getMonth() + 1).padStart(2, 0);
-    const date = String(today.getDate()).padStart(2, 0);
-    const monthAndDate = `${month}th${date}`;
-    const year = today.getFullYear();
-
-    const dayArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-    setDate({
-      day: dayArray[day],
-      monthAndDate: monthAndDate,
-      year: year,
-    });
-  }, []);
-
   //현재 위치의 날씨 정보 불러오기
   useEffect(() => {
     const geoSuccess = async (position) => {
@@ -56,6 +71,8 @@ const Home = ({ authService, weatherService }) => {
       const lon = position.coords.longitude;
 
       const data = await weatherService.getCurrentWeather(lat, lon);
+      setLoading(false);
+
       setCurrentWeather({
         location: data.name,
         temp: Math.floor(data.main.temp),
@@ -73,6 +90,18 @@ const Home = ({ authService, weatherService }) => {
     authService.logout();
   };
 
+  // sync database
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+    const stopSync = bookmarkDB.syncBookmark(userId, (value) => {
+      setBookmark(value);
+    });
+
+    return () => stopSync();
+  }, [userId, bookmarkDB]);
+
   // authService
   useEffect(() => {
     authService.onAuthChange((user) => {
@@ -85,36 +114,55 @@ const Home = ({ authService, weatherService }) => {
   }, [authService, history]);
 
   return (
-    <div
+    <section
       className={`${styles.home} ${getWeatherImage(currentWeather.weather)}`}
     >
-      <Header onLogout={onLogout} />
-      <div className={styles.info}>
-        <div className={styles.weather_wrapper}>
-          <p className={styles.location}>
-            <i className="fa-solid fa-location-dot"></i>
-            <strong>{currentWeather.location}</strong>
-          </p>
+      {loading && <div className={styles.loading}></div>}
 
-          <p className={styles.temp}>{currentWeather.temp}℃</p>
-
-          <p className={styles.weather}>{currentWeather.weather}</p>
-        </div>
-
+      <div className={styles.header}>
+        <Header onLogout={onLogout} />
         <div className={styles.date}>
-          <span className={styles.day}>{date.day}</span>
-          <span className={styles.today}>{date.monthAndDate}</span>
-          <span className={styles.year}>{date.year}</span>
+          <DateForm />
         </div>
       </div>
 
-      <div className={styles.search_section}>
-        <Search
-          weatherService={weatherService}
-          getSearchWeather={getSearchWeather}
-        />
+      <div className={styles.container}>
+        <div className={styles.info}>
+          <div className={styles.weatherInfo}>
+            <div className={styles.location}>
+              <button
+                onClick={onClickBookmark}
+                className={styles.bookmarkBtn}
+                title="Bookmark"
+              >
+                <i className="fa-solid fa-location-dot"></i>
+              </button>
+
+              <strong ref={locationRef}>{currentWeather.location || ''}</strong>
+            </div>
+
+            <div className={styles.mainWeather}>
+              <span className={styles.temp}>{`${
+                currentWeather.temp || ''
+              }℃`}</span>
+
+              <span className={styles.weather}>
+                {currentWeather.weather || ''}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.search_section}>
+          <Search
+            weatherService={weatherService}
+            getSearchWeather={getSearchWeather}
+            bookmark={bookmark}
+            deleteBookmark={deleteBookmark}
+          />
+        </div>
       </div>
-    </div>
+    </section>
   );
 
   function getWeatherImage(weather) {

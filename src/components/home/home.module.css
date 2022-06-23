@@ -1,6 +1,5 @@
 .home {
-  display: flex;
-  justify-content: space-between;
+  position: relative;
   background-image: url('/public/images/clouds.jpg');
   background-repeat: no-repeat;
   background-position: center center;
@@ -8,83 +7,119 @@
   transition: all 500ms ease-in-out;
 }
 
-.info {
-  position: relative;
-}
-
-.weather_wrapper {
+.loading {
   position: absolute;
-  display: flex;
-  left: 6rem;
-  bottom: 10%;
+  top: 50%;
+  left: 50%;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  border: 6px solid #f2f2ed;
+  border-top: 6px solid #f55c47;
+  animation-name: loading;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  font-size: 2.2rem;
-  font-weight: 700;
-  text-shadow: 1px 1px 1px gray;
-  color: #efefef;
-}
-
-.location {
-  display: flex;
-  margin-right: 1rem;
-}
-
-.location strong {
-  margin-left: 0.2em;
-}
-
-.temp {
-  margin-right: 1rem;
 }
 
 .date {
   position: absolute;
+  left: 2%;
+}
+
+.container {
   display: flex;
-  bottom: 8%;
-  left: 7rem;
-  font-size: 1.1rem;
+  justify-content: space-between;
+}
+
+.weatherInfo {
+  position: absolute;
+  display: flex;
+  align-items: end;
+  left: 3%;
+  bottom: 10%;
+  padding: 0 1rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  font-style: italic;
-  text-shadow: 1px 1px 1px gray;
-  color: #efefef;
+  text-shadow: 2px 2px 2px gray;
+  color: #f7f5f2;
 }
 
-.day {
-  margin-right: 0.5rem;
+.location {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
 }
 
-.today {
-  margin-right: 0.5rem;
+.bookmarkBtn {
+  position: relative;
+  bottom: 0.2rem;
+  border: 0;
+  background: 0;
+  margin-right: 0.2em;
+  cursor: pointer;
+  font-size: 2.2rem;
+  color: #f7f5f2;
+  text-shadow: 2px 2px 2px gray;
 }
 
-.app.clouds {
+.bookmarkBtn:hover {
+  color: #f55c47;
+}
+
+.mainWeather {
+  display: flex;
+  align-items: end;
+}
+
+.temp {
+  position: relative;
+  top: 0.3rem;
+  margin-right: 0.8rem;
+  font-size: 2.8rem;
+}
+
+.home.clouds {
   background-image: url('/public/images/clouds.jpg');
 }
-.app.clear {
+.home.clear {
   background-image: url('/public/images/clear.jpg');
 }
-.app.thunder {
+.home.thunder {
   background-image: url('/public/images/thunder.jpg');
 }
-.app.drizzle {
+.home.drizzle {
   background-image: url('/public/images/drizzle.jpg');
 }
-.app.rain {
+.home.rain {
   background-image: url('/public/images/rain.jpg');
 }
-.app.snow {
+.home.snow {
   background-image: url('/public/images/snow.jpg');
 }
-.app.smog {
+.home.smog {
   background-image: url('/public/images/smog.jpg');
 }
-.app.default {
-  background-image: url('/public/images/smog.jpg');
+.home.default {
+  background-image: url('/public/images/default.jpg');
+}
+
+@keyframes loading {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* responsive mobile*/
 @media screen and (max-width: 48rem) {
-  .app {
+  .home {
     width: 100%;
     height: 100%;
     flex-direction: column-reverse;
