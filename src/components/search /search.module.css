@@ -1,19 +1,9 @@
-.container {
+.searchForm {
   width: 40vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 1rem 1.5rem;
-}
-
-.button,
-.input {
-  border: 0;
-  background-color: transparent;
-}
-
-.button:focus,
-.input:focus {
-  outline: none;
+  padding: 0 2.8rem;
+  padding-top: 3.5rem;
 }
 
 .form {
@@ -22,7 +12,18 @@
   align-items: center;
   width: 100%;
   border-bottom: 1px solid #dfdfde;
-  margin-bottom: 22rem;
+  margin-bottom: 3rem;
+}
+
+.input,
+.button {
+  border: 0;
+  background: 0;
+}
+
+.button:focus,
+.input:focus {
+  outline: none;
 }
 
 .input {
@@ -33,21 +34,35 @@
 }
 
 .button {
+  cursor: pointer;
   flex-grow: 0;
   flex-shrink: 0;
   font-size: 1.3rem;
   color: #9d9d9d;
-  cursor: pointer;
 }
 
 .button:hover {
   opacity: 0.7;
 }
 
+.bookmarkList {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.cityList {
+  list-style: none;
+  padding-left: 0;
+  width: 80%;
+  height: 13rem;
+  overflow-y: auto;
+}
+
 .title {
   font-size: 1.5rem;
-  color: #dfdfde;
-  margin-bottom: 2em;
+  color: #ffcd00;
+  margin-bottom: 1.3rem;
+  text-shadow: 0.05rem 0.05rem 0 rgb(112, 111, 111);
 }
 
 .info {

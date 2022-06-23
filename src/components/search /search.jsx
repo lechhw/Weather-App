@@ -1,14 +1,21 @@
 import React, { useRef, useState } from 'react';
+import BookmarkList from '../bookmark_list/bookmark_list';
+import Details from '../details/details';
 import styles from './search.module.css';
 
-const Search = ({ weatherService, getSearchWeather }) => {
+const Search = ({
+  weatherService,
+  getSearchWeather,
+  bookmark,
+  deleteBookmark,
+}) => {
   const inputRef = useRef();
   const [detailInfo, setDetailInfo] = useState({
-    weather: null,
-    tempMax: null,
-    tempMin: null,
-    humidity: null,
-    windSpeed: null,
+    weather: '',
+    tempMax: '',
+    tempMin: '',
+    humidity: '',
+    windSpeed: '',
   });
 
   const onSubmit = async (e) => {
@@ -30,7 +37,7 @@ const Search = ({ weatherService, getSearchWeather }) => {
   };
 
   return (
-    <section className={styles.container}>
+    <section className={styles.searchForm}>
       <form className={styles.form} onSubmit={onSubmit}>
         <input
           list="cityList"
@@ -65,34 +72,29 @@ const Search = ({ weatherService, getSearchWeather }) => {
           <option value="Dubai" label="두바이"></option>
           <option value="Moscow" label="모스크바"></option>
         </datalist>
+
         <button className={styles.button}>
           <i className="fa-solid fa-magnifying-glass-location"></i>
         </button>
       </form>
 
+      <div className={styles.bookmarkList}>
+        <h3 className={styles.title}>Bookmark List</h3>
+        <ul className={styles.cityList}>
+          {Object.keys(bookmark).map((card) => (
+            <BookmarkList
+              card={bookmark[card]}
+              key={card}
+              getSearchWeather={getSearchWeather}
+              deleteBookmark={deleteBookmark}
+            />
+          ))}
+        </ul>
+      </div>
+
       <div className={styles.wrapper}>
         <h3 className={styles.title}>Weather Details</h3>
-
-        <dl className={styles.details}>
-          <div className={styles.info}>
-            <dt>Weather</dt>
-            <dd>{detailInfo.weather}</dd>
-          </div>
-          <div className={styles.info}>
-            <dt>Max/Min Temp</dt>
-            <dd>
-              {detailInfo.tempMax}℃ / {detailInfo.tempMin}℃
-            </dd>
-          </div>
-          <div className={styles.info}>
-            <dt>Humidity</dt>
-            <dd>{detailInfo.humidity} %</dd>
-          </div>
-          <div className={styles.info}>
-            <dt>Wind Speed</dt>
-            <dd>{detailInfo.windSpeed} m/s</dd>
-          </div>
-        </dl>
+        <Details detailInfo={detailInfo} />
       </div>
     </section>
   );
