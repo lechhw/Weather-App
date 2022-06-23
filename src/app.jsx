@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Home from './components/home/home';
 import Login from './components/login/login';
 
-function App({ authService, weatherService }) {
+function App({ authService, weatherService, bookmarkDB }) {
   return (
     <div className={styles.app}>
       <BrowserRouter>
@@ -16,7 +16,11 @@ function App({ authService, weatherService }) {
           </Route>
 
           <Route path="/home">
-            <Home authService={authService} weatherService={weatherService} />
+            <Home
+              authService={authService}
+              weatherService={weatherService}
+              bookmarkDB={bookmarkDB}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
