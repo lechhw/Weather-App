@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './bookmark_list.module.css';
 
-const BookmarkList = ({ card, getSearchWeather, deleteBookmark }) => {
+const BookmarkList = ({ card, getCityWeather, deleteBookmark }) => {
   const onClick = (e) => {
-    const selectCity = e.target.textContent;
-    getSearchWeather(selectCity);
+    const city = e.target.textContent;
+    getCityWeather(city);
   };
 
   return (
