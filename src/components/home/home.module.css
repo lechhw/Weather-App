@@ -107,6 +107,9 @@
 .home.smog {
   background-image: url('/public/images/smog.jpg');
 }
+.home.mist {
+  background-image: url('/public/images/mist.jpg');
+}
 .home.default {
   background-image: url('/public/images/default.jpg');
 }
