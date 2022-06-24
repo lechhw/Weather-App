@@ -7,22 +7,22 @@ const Details = ({ currentWeather }) => {
   return (
     <dl className={styles.details}>
       <div className={styles.info}>
-        <dt>Weather</dt>
+        <dt>Weather :</dt>
         <dd>{weather}</dd>
       </div>
 
       <div className={styles.info}>
-        <dt>Max/Min Temp</dt>
+        <dt>Max/Min Temp :</dt>
         <dd>{`${tempMax || ''}℃ / ${tempMin || ''}℃`}</dd>
       </div>
 
       <div className={styles.info}>
-        <dt>Humidity</dt>
+        <dt>Humidity :</dt>
         <dd>{`${humidity || ''} %`}</dd>
       </div>
 
       <div className={styles.info}>
-        <dt>Wind Speed</dt>
+        <dt>Wind Speed :</dt>
         <dd>{`${windSpeed || ''} m/s`}</dd>
       </div>
     </dl>
