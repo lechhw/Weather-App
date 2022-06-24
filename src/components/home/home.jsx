@@ -138,7 +138,7 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
         </div>
       </div>
 
-      <div className={styles.container}>
+      <div className={styles.contents}>
         <div className={styles.info}>
           <div className={styles.weatherInfo}>
             <div className={styles.location}>
@@ -153,7 +153,7 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
               <strong ref={locationRef}>{currentWeather.location || ''}</strong>
             </div>
 
-            <div className={styles.mainWeather}>
+            <div className={styles.main}>
               <span className={styles.temp}>{`${
                 currentWeather.temp || ''
               }℃`}</span>
@@ -165,7 +165,7 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
           </div>
         </div>
 
-        <div className={styles.search_section}>
+        <div className={styles.search}>
           <Search
             getCityWeather={getCityWeather}
             currentWeather={currentWeather}

@@ -51,9 +51,9 @@ const Search = ({
         </button>
       </form>
 
-      <div className={styles.bookmarkList}>
+      <div className={styles.bookmarkWrapper}>
         <h3 className={styles.title}>Bookmark List</h3>
-        <ul className={styles.cityList}>
+        <ul className={styles.list}>
           {Object.keys(bookmark).map((card) => (
             <BookmarkList
               card={bookmark[card]}
@@ -65,7 +65,7 @@ const Search = ({
         </ul>
       </div>
 
-      <div className={styles.wrapper}>
+      <div className={styles.detailsWrapper}>
         <h3 className={styles.title}>Weather Details</h3>
         <Details currentWeather={currentWeather} />
       </div>
