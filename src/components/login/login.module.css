@@ -1,3 +1,6 @@
+@value Tablet_S, Mobile from '../../common/size.css';
+@value weatherWhite, weatherBlack, weatherGrey, weatherRed, weatherYellow, weatherGreen, weatherIllustBGC  from '../../common/style.css';
+
 .login {
   display: flex;
   position: fixed;
@@ -10,7 +13,7 @@
   transform: translate(-50%, -50%);
   overflow: hidden;
   border-radius: 0.5rem;
-  background-color: #fff;
+  background-color: weatherWhite;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
@@ -20,7 +23,7 @@
   border: 0;
   background: 0;
   cursor: pointer;
-  outline-color: #e1bf14;
+  outline-color: weatherYellow;
 }
 
 /* login form */
@@ -44,7 +47,7 @@
 }
 
 .guide {
-  color: #616161;
+  color: weatherGrey;
   font-size: 0.9rem;
 }
 
@@ -61,8 +64,8 @@
   padding: 0.5em;
   margin-bottom: 0.8rem;
   font-size: 1rem;
-  border-bottom: 1px solid #616161;
-  outline-color: #e1bf14;
+  border-bottom: 1px solid weatherGrey;
+  outline-color: weatherYellow;
 }
 
 .input.pw {
@@ -73,7 +76,7 @@
 .error {
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  color: #d32626;
+  color: weatherRed;
 }
 
 /* login form > form > signBtn */
@@ -81,13 +84,14 @@
   padding: 0.8rem 0;
   font-size: 1rem;
   font-weight: 700;
-  color: #fff;
-  background-color: #658361;
+  color: weatherWhite;
+  background-color: weatherGreen;
   border-radius: 0.5rem;
   transition: opacity 200ms ease-in-out;
 }
 
-.signBtn:hover {
+.signBtn:hover,
+.signBtn:active {
   opacity: 0.7;
 }
 
@@ -95,7 +99,7 @@
 .divider {
   margin: 1.4rem 0;
   font-size: 0.8rem;
-  color: #616161;
+  color: weatherGrey;
 }
 
 /* provider list */
@@ -123,11 +127,12 @@
   padding: 0.7em 0;
   font-size: 1rem;
   border-radius: 0.5rem;
-  border: 1px solid #658361;
+  border: 1px solid weatherGreen;
   transition: box-shadow 250ms ease-in-out;
 }
 
-.providerBtn:hover {
+.providerBtn:hover,
+.providerBtn:active {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
@@ -141,23 +146,23 @@
   justify-content: center;
   align-items: center;
   font-size: 0.9rem;
-  color: #616161;
+  color: weatherGrey;
 }
 
 .toggleBtn {
   font-weight: 600;
-  color: #e1bf14;
+  color: weatherYellow;
 }
 
 .toggleBtn:hover {
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 /* illustration  */
 .illustration {
   flex: 1 1 50%;
   padding: 0 1.5rem;
-  background-color: #65836111;
+  background-color: weatherIllustBGC;
 }
 
 .illustration img {
@@ -165,4 +170,48 @@
   width: 100%;
   height: 100%;
   margin: 0 auto;
+}
+
+/* responsive : Tablet_S */
+@media screen and (max-width: Tablet_S) {
+  .illustration {
+    display: none;
+  }
+}
+
+/* responsive : Mobile */
+@media screen and (max-width: Mobile) {
+  .login {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .header {
+    margin-bottom: 2.8rem;
+  }
+
+  .form {
+    width: 80%;
+  }
+
+  .divider {
+    margin: 1rem 0;
+  }
+
+  .providerItem {
+    width: 80%;
+  }
+
+  .providerBtn {
+    font-size: 0.9rem;
+  }
+
+  .accountGuide {
+    font-size: 0.8rem;
+  }
+
+  .toggleBtn {
+    font-size: 0.9rem;
+  }
 }
