@@ -8,20 +8,24 @@ import DateForm from '../date_form/date_form';
 const Home = ({ authService, weatherService, bookmarkDB }) => {
   const locationRef = useRef();
   const history = useHistory();
-
   // login 컴포넌트에서 받아온 유저정보를 historyState 에 저장
   const historyState = history.location.state;
-  const [userId, setUserId] = useState(historyState && historyState.id); //
+  const [userId, setUserId] = useState(historyState && historyState.id);
+  const [bookmark, setBookmark] = useState({});
+  const [loading, setLoading] = useState(true);
   const [currentWeather, setCurrentWeather] = useState([
     {
       location: '',
       temp: '',
       weather: '',
+      tempMax: '',
+      tempMin: '',
+      humidity: '',
+      windSpeed: '',
     },
   ]);
-  const [bookmark, setBookmark] = useState({});
-  const [loading, setLoading] = useState(true);
 
+  // 북마크에서 해제
   const deleteBookmark = (card) => {
     setBookmark((bookmark) => {
       const updated = { ...bookmark };
@@ -31,6 +35,7 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
     bookmarkDB.removeBookmark(userId, card);
   };
 
+  // 북마크에 추가
   const addBookmark = (card) => {
     setBookmark((bookmark) => {
       const updated = { ...bookmark };
@@ -46,21 +51,24 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
       id: Date.now(),
       location: city,
     };
-
+    // 북마크에 동일한 도시가 있으면 중복 추가 X
     if (Object.values(bookmark).some((item) => item.location === city)) {
       return;
     }
-
     addBookmark(card);
   };
 
   // 검색된 도시 날씨 정보 가져오기
-  const getSearchWeather = async (city) => {
-    const result = await weatherService.getWeather(city);
+  const getCityWeather = async (city) => {
+    const data = await weatherService.getWeather(city);
     setCurrentWeather({
-      location: result.name,
-      temp: Math.floor(result.main.temp),
-      weather: result.weather[0].main,
+      location: data.name,
+      temp: Math.floor(data.main.temp),
+      weather: data.weather[0].main,
+      tempMax: Math.floor(data.main.temp_max),
+      tempMin: Math.floor(data.main.temp_min),
+      humidity: data.main.humidity,
+      windSpeed: Math.floor(data.wind.speed),
     });
   };
 
@@ -69,23 +77,26 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
     const geoSuccess = async (position) => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-
       const data = await weatherService.getCurrentWeather(lat, lon);
       setLoading(false);
-
       setCurrentWeather({
         location: data.name,
         temp: Math.floor(data.main.temp),
         weather: data.weather[0].main,
+        tempMax: Math.floor(data.main.temp_max),
+        tempMin: Math.floor(data.main.temp_min),
+        humidity: data.main.humidity,
+        windSpeed: Math.floor(data.wind.speed),
       });
     };
-
     const geoError = () => {
       alert(new Error('Location information not found.'));
     };
+
     navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
   }, []);
 
+  // logout
   const onLogout = () => {
     authService.logout();
   };
@@ -99,6 +110,7 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
       setBookmark(value);
     });
 
+    // unmount 되면 sync off
     return () => stopSync();
   }, [userId, bookmarkDB]);
 
@@ -155,8 +167,8 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
 
         <div className={styles.search_section}>
           <Search
-            weatherService={weatherService}
-            getSearchWeather={getSearchWeather}
+            getCityWeather={getCityWeather}
+            currentWeather={currentWeather}
             bookmark={bookmark}
             deleteBookmark={deleteBookmark}
           />
@@ -181,6 +193,8 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
         return styles.clear;
       case 'Clouds':
         return styles.clouds;
+      case 'Mist':
+        return styles.misseat;
 
       default:
         return styles.default;
