@@ -1,5 +1,8 @@
+@value weatherAppBGC from './common/style.css';
+
 .app {
+  position: fixed;
   width: 100%;
   height: 100vh;
-  background-color: #82954b40;
+  background-color: weatherAppBGC;
 }
