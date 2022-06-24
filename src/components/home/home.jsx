@@ -194,7 +194,7 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
       case 'Clouds':
         return styles.clouds;
       case 'Mist':
-        return styles.misseat;
+        return styles.mist;
 
       default:
         return styles.default;
