@@ -1,3 +1,6 @@
+@value Tablet, Tablet_S, Mobile from '../../common/size.css';
+@value weatherWhite, weatherBlack from '../../common/style.css';
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -17,19 +20,47 @@
 
 .title {
   font-size: 1.2rem;
-  color: #000000;
+  color: weatherBlack;
   text-shadow: 0.05rem 0.05rem 0 rgb(148, 148, 148);
 }
 
+/* logout button */
 .logoutBtn {
   border: 0;
   background: 0;
   cursor: pointer;
   padding: 0.5rem 0.2rem;
-  color: #ffff;
+  color: weatherWhite;
   font-weight: 500;
 }
 
-.logoutBtn:hover {
+.logoutBtn:hover,
+.logoutBtn:active {
   opacity: 0.5;
+}
+
+/* responsive : Tablet_S */
+@media screen and (max-width: Tablet_S) {
+  .logoImg {
+    width: 2.2rem;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+}
+
+/* responsive : Mobile */
+@media screen and (max-width: Mobile) {
+  .header {
+    padding: 0.3rem 0.5rem;
+  }
+
+  .title {
+    font-size: 0.9rem;
+  }
+
+  .logoutBtn {
+    font-size: 0.8em;
+  }
 }

@@ -1,17 +1,31 @@
+@value Tablet, Tablet_S from '../../common/size.css';
+@value weatherWhite from '../../common/style.css';
+
 .info {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 0.5rem 2.5rem 0.5rem;
   font-size: 1.1rem;
-  color: #dfdfde;
-}
-
-.info dt,
-.info dd {
   font-weight: 500;
-  padding: 1.2rem 0;
+  color: weatherWhite;
+  text-shadow: 0.05rem 0.05rem 0.05rem rgb(146, 145, 145);
 }
 
-.info dd {
-  margin: 0;
+.info:last-child {
+  padding-bottom: 0;
+}
+
+/* responsive : Tablet_S */
+@media screen and (max-width: Tablet_S) {
+  .info {
+    padding-bottom: 1.8rem;
+  }
+}
+
+/* responsive : Mobile */
+@media screen and (max-width: Mobile) {
+  .info {
+    padding-bottom: 1.4rem;
+  }
 }

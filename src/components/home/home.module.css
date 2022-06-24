@@ -1,3 +1,6 @@
+@value Tablet_S,  Mobile from '../../common/size.css';
+@value weatherWhite, weatherRed from '../../common/style.css';
+
 .home {
   position: relative;
   background-image: url('/public/images/clouds.jpg');
@@ -7,6 +10,7 @@
   transition: all 500ms ease-in-out;
 }
 
+/* loading spinor */
 .loading {
   position: absolute;
   top: 50%;
@@ -14,14 +18,15 @@
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
-  border: 6px solid #f2f2ed;
-  border-top: 6px solid #f55c47;
+  border: 6px solid weatherWhite;
+  border-top: 6px solid weatherRed;
   animation-name: loading;
   animation-duration: 2s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
+/* header */
 .header {
   position: absolute;
   top: 0;
@@ -29,29 +34,33 @@
   width: 100%;
 }
 
+/* current date */
 .date {
   position: absolute;
-  left: 2%;
+  top: 3.4rem;
+  left: 1.5rem;
 }
 
-.container {
+/* contents */
+.contents {
   display: flex;
   justify-content: space-between;
 }
 
+/* weather info */
 .weatherInfo {
   position: absolute;
   display: flex;
   align-items: end;
-  left: 3%;
-  bottom: 10%;
-  padding: 0 1rem;
+  left: 4%;
+  bottom: 8%;
   font-size: 2.2rem;
   font-weight: 700;
   text-shadow: 2px 2px 2px gray;
-  color: #f7f5f2;
+  color: weatherWhite;
 }
 
+/* weather info > location */
 .location {
   display: flex;
   align-items: center;
@@ -66,15 +75,17 @@
   margin-right: 0.2em;
   cursor: pointer;
   font-size: 2.2rem;
-  color: #f7f5f2;
+  color: weatherWhite;
   text-shadow: 2px 2px 2px gray;
 }
 
-.bookmarkBtn:hover {
-  color: #f55c47;
+.bookmarkBtn:hover,
+.bookmarkBtn:active {
+  color: weatherRed;
 }
 
-.mainWeather {
+/* weather info > main */
+.main {
   display: flex;
   align-items: end;
 }
@@ -86,6 +97,7 @@
   font-size: 2.8rem;
 }
 
+/* background image */
 .home.clouds {
   background-image: url('/public/images/clouds.jpg');
 }
@@ -114,39 +126,54 @@
   background-image: url('/public/images/default.jpg');
 }
 
+/* animation */
 @keyframes loading {
   100% {
     transform: rotate(360deg);
   }
 }
 
-/* responsive mobile*/
-@media screen and (max-width: 48rem) {
-  .home {
-    width: 100%;
-    height: 100%;
+/* responsive : Tablet_S */
+@media screen and (max-width: Tablet_S) {
+  .contents {
     flex-direction: column-reverse;
-    justify-content: start;
-    position: fixed;
-  }
-
-  .info {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
     justify-content: end;
-    padding: 0 1.5rem;
-    padding-bottom: 2.5rem;
-  }
-
-  .weather_wrapper {
-    font-size: 1.5rem;
-    position: static;
   }
 
   .date {
-    font-size: 1rem;
-    position: static;
+    top: 3.2rem;
+  }
+
+  .weatherInfo {
+    left: 4%;
+    bottom: 6%;
+  }
+}
+
+/* responsive : Mobile */
+@media screen and (max-width: Mobile) {
+  .date {
+    top: 2.6rem;
+    left: 1rem;
+  }
+
+  .weatherInfo {
+    font-size: 1.8rem;
+    left: 4%;
+    bottom: 5%;
+  }
+
+  .location {
+    margin-right: 0.5rem;
+  }
+
+  .bookmarkBtn {
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  .temp {
+    font-size: 2.3rem;
+    margin-right: 0.5rem;
   }
 }
