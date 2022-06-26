@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import styles from './date_form.module.css';
 
-const DateForm = () => {
+const DateForm = memo(() => {
   const [date, setDate] = useState({
     month: '',
     date: '',
@@ -44,6 +44,6 @@ const DateForm = () => {
       <span className={styles.year}>{date.year}</span>
     </div>
   );
-};
+});
 
 export default DateForm;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './home.module.css';
 import Search from '../search /search';
 import { useHistory } from 'react-router-dom';
@@ -97,9 +97,9 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
   }, []);
 
   // logout
-  const onLogout = () => {
+  const onLogout = useCallback(() => {
     authService.logout();
-  };
+  });
 
   // sync database
   useEffect(() => {
