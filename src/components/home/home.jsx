@@ -82,6 +82,7 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
       const lon = position.coords.longitude;
       const data = await weatherService.getCurrentWeather(lat, lon);
       setLoading(false);
+
       setCurrentWeather({
         location: data.name,
         temp: Math.floor(data.main.temp),
@@ -102,7 +103,7 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
   // logout
   const onLogout = useCallback(() => {
     authService.logout();
-  });
+  }, []);
 
   // sync database
   useEffect(() => {

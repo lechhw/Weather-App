@@ -1,6 +1,7 @@
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 class Weather {
+  // 위도,경도 로 data 받아오기
   async getCurrentWeather(lat, lon) {
     const requestOptions = {
       method: 'GET',
@@ -16,6 +17,7 @@ class Weather {
     return data;
   }
 
+  // 도시명으로 data 받아오기
   async getWeather(city) {
     const requestOptions = {
       method: 'GET',
