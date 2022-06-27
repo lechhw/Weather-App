@@ -1,11 +1,12 @@
-# Weather App
+# ☀️ Weather App
 
 # Intro
 
 OpenWeatherMap API 를 이용한 날씨 검색 웹 어플리케이션 입니다.<br>
-사용자가 검색창에 도시명을 입력하면 해당 도시의 온도,습도,풍속 등의 디테일한 날씨정보를 알려줍니다. 날씨 정보에 따라 그에 맞는 이미지의 배경으로 전환됩니다. <br>
-Firebase 의 Authentication 서비스를 이용하여 이메일&비밀번호 로그인 및 회원가입 기능과 소셜로그인 기능을 구현하였고, 북마크기능을 추가하여 Realtime database 에 유저 id 별로 사용자가 즐겨찾는 도시를 저장할 수 있습니다. <br>
-또한 Date()함수를 사용하여 오늘 날짜를 보여주고, mount 가 되면 getCurrentPosition()함수를 사용하여 현재 위치 정보를 받아와 현재 위치의 날씨 정보를 기본으로 보여줍니다.<br>
+사용자가 검색창에 도시명을 입력하면 해당 도시의 온도,습도,풍속 등의 디테일한 날씨정보를 알려주며, 날씨에 따라 그에 맞는 이미지의 배경으로 전환됩니다. <br>
+Firebase 의 Authentication 서비스를 이용하여 이메일주소와 비밀번호를 사용한 로그인 및 회원가입 기능과 소셜로그인 기능을 구현하였고, <br> 
+북마크기능을 추가하여 Realtime database 에 유저 uid 별로 사용자가 즐겨찾는 도시를 저장할 수 있습니다. <br>
+또한 mount 가 되면 Date()함수를 사용하여 오늘 날짜를 보여주고, getCurrentPosition()함수를 사용하여 현재 위치의 날씨 정보를 보여줍니다.<br>
 
 <br>
 
@@ -27,6 +28,7 @@ Firebase 의 Authentication 서비스를 이용하여 이메일&비밀번호 로
 - [x] React Router
 - [x] Firebase
   - Authentication
+  - Realtime database
 - [x] PostCSS
 - [x] Postman
 
@@ -60,10 +62,10 @@ Firebase 의 Authentication 서비스를 이용하여 이메일&비밀번호 로
 
 # Solution
 
-## - [x] OpenWeatherMap API
+## ✅ OpenWeatherMap API
 
-Postman 을 이용하여 API 통신 테스트 후 받아온 fetch 코드를 사용하였습니다.
-또한 service 로직은 컴포넌트 파일에 함께 작성하지 않고, service 폴더를 생성해 따로 분리하여 작성하였습니다.
+Postman 을 이용하여 API 통신 테스트 후 받아온 fetch 코드를 사용하였습니다.<br>
+또한 service 로직은 컴포넌트 파일에 함께 작성하지 않고, service 폴더를 생성해 따로 분리하여 작성하였습니다.<br>
 현재 위치의 날씨정보는 위도와 경도 인자값을 전달하여 데이터를 받아오고, 검색한 도시의 날씨정보는 도시명을 인자값을 전달하여 데이터를 받아옵니다.
 
 ```js
@@ -108,9 +110,10 @@ export default Weather;
 
 <br>
 
-## - [x] Firebase Authentication
+## ✅ Firebase Authentication
 
-로그인에 하는데 필요한 provider을 import 해서 signInWithPopup(), signOut() 을 호출해줍니다. 해당 프로젝트에서는 소셜로그인기능과, 이메일주소와 비밀번호를 사용해 신규사용자가입 & 로그인 기능을 사용하기 때문에 createUserWithEmailAndPassword(), signInWithEmailAndPassword() 도 호출해줍니다.
+로그인 하는데 필요한 firebaseAuth 를 import 해서 `signInWithPopup()`, `signOut()` 함수를 호출해줍니다. <br>
+해당 프로젝트에서는 소셜로그인기능과 이메일주소와 비밀번호를 사용해 신규사용자가입 & 로그인 기능을 사용하기 때문에 `createUserWithEmailAndPassword()`, `signInWithEmailAndPassword()` 함수도 호출해줍니다.
 
 ```js
 // auth_service.js
@@ -160,11 +163,12 @@ export default AuthService;
 
 <br>
 
-## - [x] Firebase Realtime Database
+## ✅ Firebase Realtime Database
 
-database 와 관련된 것들은 BookmarkDB 클래스의 멤버변수로 정의해주었습니다.
-saveBookmark() 와 removeBookmark() 함수는 원하는 경로(ref)에 데이터를 저장하고(set) 제거(remove) 해줍니다.
-syncBookmark() 함수는 경로(ref)에 snapshot 이라는 리스너를 등록해 변경사항을 인식하고, 데이터가 존재하면 등록된 onUpdate() 라는 콜백함수를 호출해줍니다. 또한 ref.off() 라는 리스너를 제거해주는 함수를 리턴해주어 해당함수를 받는곳에서(useEffect) cleanup 함수로 등록하여 unmount 가 되면 리스너가 제거됩니다.
+database 와 관련된 것들은 BookmarkDB 클래스의 멤버함수로 정의해주었습니다.<br>
+`saveBookmark()` 와 `removeBookmark()` 함수는 원하는 경로(ref)에 데이터를 저장하고(set) 제거(remove) 해줍니다.<br>
+`syncBookmark()` 함수는 경로(ref)에 snapshot 이라는 리스너를 등록해 변경사항을 인식하고, 데이터가 존재하면 등록된 `onUpdate()` 라는 콜백함수를 호출해줍니다.
+또한 ref.off() 라는 리스너를 제거해주는 함수를 리턴해주어 해당함수를 받는곳에서(useEffect) cleanup 함수로 등록하여 unmount 가 되면 리스너가 제거됩니다.
 
 ```js
 // bookmark_db.js
@@ -195,9 +199,10 @@ export default BookmarkDB;
 
 <br>
 
-## - [x] Login & Sign up
+## ✅ Login & Sign up
 
-CreateForm 컴포넌트를 분리하여 작성후 로그인 컴포넌트 하단에 토글버튼을 클릭하여 CreateForm 컴포넌트와 Login 컴포넌트가 전환 될 수 있도록 구현하였습니다. 또한 email, password 로그인 및 회원가입시 에러가 발생하면 에러코드를 화면에 구현하여 사용자가 에러를 인지할 수 있게 하였습니다.
+CreateForm 컴포넌트를 분리하여 작성후 로그인 컴포넌트 하단에 토글버튼을 클릭하여 CreateForm 컴포넌트와 Login 컴포넌트가 전환 될 수 있도록 구현하였습니다.
+또한 email, password 로그인 및 회원가입시 에러가 발생하면 에러코드를 화면에 구현하여 사용자가 에러를 인지할 수 있게 하였습니다.
 
 ```js
 const Login = ({ authService }) => {
@@ -370,9 +375,9 @@ export default CreateForm;
 
 <br>
 
-## - [x] getCurrentPosition()
+## ✅ getCurrentPosition()
 
-getCurrentPosition() 메서드를 사용하여 mount 가 되면 현재 위치의 위도(lat)와 경도(lon) 를 받아와 받아온 정보로 해당위치의 날씨정보를 받아왔습니다.
+`getCurrentPosition()` 메서드를 사용하여 mount 가 되면 현재 위치의 위도(lat)와 경도(lon) 를 받아와 받아온 정보로 해당위치의 날씨정보를 받아왔습니다.
 
 ```js
 // home.js
@@ -405,9 +410,9 @@ useEffect(() => {
 
 <br>
 
-## - [x] Add Bookmark
+## ✅ Add Bookmark
 
-bookmark 에 추가하기 전에 기존에 북마크리스트에 동일한 도시가 있다면 중복 추가가 안되도록 제한하였습니다.
+bookmark 에 추가하기 전에 기존에 북마크에 동일한 도시가 있다면 중복 추가가 안되도록 제한하였습니다.
 
 ```js
 // home.js
@@ -436,36 +441,3 @@ const onClickBookmark = () => {
 };
 ```
 
-<br>
-
-## - [x] Background image
-
-Switch 를 사용하여 날씨에 따라 className 을 각각 추가해주어 해당하는 날씨 정보에 어울리는 배경이미지로 전환되도록 하였습니다.
-
-```js
-// home.js
-
-function getWeatherImage(weather) {
-  switch (weather) {
-    case 'Thunderstorm ':
-      return styles.thunder;
-    case 'Drizzle':
-      return styles.drizzle;
-    case 'Rain':
-      return styles.rain;
-    case 'Snow':
-      return styles.snow;
-    case 'Atmosphere':
-      return styles.smog;
-    case 'Clear':
-      return styles.clear;
-    case 'Clouds':
-      return styles.clouds;
-    case 'Mist':
-      return styles.mist;
-
-    default:
-      return styles.default;
-  }
-}
-```
