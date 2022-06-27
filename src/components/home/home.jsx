@@ -60,7 +60,10 @@ const Home = ({ authService, weatherService, bookmarkDB }) => {
 
   // 검색된 도시 날씨 정보 가져오기
   const getCityWeather = async (city) => {
+    setLoading(true);
     const data = await weatherService.getWeather(city);
+    setLoading(false);
+
     setCurrentWeather({
       location: data.name,
       temp: Math.floor(data.main.temp),

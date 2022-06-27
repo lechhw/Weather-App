@@ -3,7 +3,6 @@
 
 .home {
   position: relative;
-  background-image: url('/public/images/clouds.jpg');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
